@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.yongjin.PRboard.dao.IDao">
+ 
+   <!-- Member 관련 -->
+   <insert id="joinMemberDao">
+   		INSERT INTO fbmember(mid, mpw, mname, memail) VALUES (#{param1}, #{param2}, #{param3}, #{param4})
+   </insert>
+   
+   <select id="checkIdDao" resultType="int">
+   		SELECT count(*) FROM fbmember WHERE mid=#{param1}   
+   </select>
+   
+   <select id="checkIdPwDao" resultType="int">
+   		SELECT count(*) FROM fbmember WHERE mid=#{param1} AND mpw=#{param2}  
+   </select>
+   
+   <!-- board 관련 -->
+   <select id="getMemberInfo" resultType="com.yongjin.PRboard.dto.FbMemberDto">
+   		SELECT * FROM fbmember WHERE mid=#{param1}
+   </select>
+   
+   <insert id="writeDao">
+   		INSERT INTO freeboard(fnum, fid, fname, ftitle, fcontent, fhit) VALUES(myboard_seq.nextval , #{param1}, #{param2}, #{param3}, #{param4}, 0)
+   </insert>
+      
+   <select id="listDao" resultType="com.yongjin.PRboard.dto.FreeBoardDto">   		
+   		SELECT * FROM freeboard ORDER BY fnum DESC
+   </select>   
+   
+ </mapper>
